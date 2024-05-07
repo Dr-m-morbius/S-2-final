@@ -5,6 +5,10 @@ using UnityEngine;
 public class playermove : MonoBehaviour
 {
      public float moveSpeed = 1f;
+      public GameObject bullet;
+      public GameObject fireball;
+    public Transform firePoint;
+    public Transform fireballpoint;
     public float jumpForce = 10f;
       public Transform theCamera;
     public float gravityModifier = 1f;
@@ -14,11 +18,13 @@ public class playermove : MonoBehaviour
     private Vector3 _moveInput;
      private bool _canPlayerJump;
         private CharacterController _characterController;
+        [SerializeField] private Animator _playerAnim;
 
     // Start is called before the first frame update
     void Start()
     {
           _characterController = GetComponent<CharacterController>();
+          _playerAnim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -57,6 +63,8 @@ public class playermove : MonoBehaviour
             _moveInput.y = jumpForce;
         }
 
+     float horizontalInput = Input.GetAxis("Horizontal");
+     float verticalInput = Input.GetAxis("Vertical");
         _characterController.Move(_moveInput * Time.deltaTime);
 
         //Camera rotation
@@ -65,5 +73,43 @@ public class playermove : MonoBehaviour
         transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y + mouseInput.x, transform.rotation.eulerAngles.z);
 
         theCamera.rotation = Quaternion.Euler(theCamera.rotation.eulerAngles + new Vector3(-mouseInput.y, 0f, 0f));
+
+        //primary shooting
+         if(Input.GetMouseButtonDown(0))
+         {
+            //Find the crosshair
+            RaycastHit hit;
+            if(Physics.Raycast(theCamera.position, theCamera.forward, out hit, 50f))
+            {
+                if(Vector3.Distance(theCamera.position, hit.point) > 2f)
+                {
+                    firePoint.LookAt(hit.point);
+                }
+            }
+            else
+            {
+                firePoint.LookAt(theCamera.position + (theCamera.forward * 30f));
+            }
+              Instantiate(bullet, firePoint.position, firePoint.rotation);
+         }
+
+         //secondary shooting 
+         if(Input.GetMouseButtonDown(1))
+         {
+            //Find the crosshair
+            RaycastHit hit;
+            if(Physics.Raycast(theCamera.position, theCamera.forward, out hit, 50f))
+            {
+                if(Vector3.Distance(theCamera.position, hit.point) > 2f)
+                {
+                    fireballpoint.LookAt(hit.point);
+                }
+            }
+            else
+            {
+                fireballpoint.LookAt(theCamera.position + (theCamera.forward * 30f));
+            }
+              Instantiate(fireball, fireballpoint.position, fireballpoint.rotation);
+         }
     }
 }
