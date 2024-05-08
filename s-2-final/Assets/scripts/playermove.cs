@@ -6,6 +6,7 @@ public class playermove : MonoBehaviour
 {
      public float moveSpeed = 1f;
       public GameObject bullet;
+      
       public GameObject fireball;
     public Transform firePoint;
     public Transform fireballpoint;
@@ -16,6 +17,7 @@ public class playermove : MonoBehaviour
     public LayerMask whatIsGround;
     public float mouseSensitivity = 1f;
     private Vector3 _moveInput;
+    private Vector3 starttingPose; 
      private bool _canPlayerJump;
         private CharacterController _characterController;
         [SerializeField] private Animator _playerAnim;
@@ -25,6 +27,7 @@ public class playermove : MonoBehaviour
     {
           _characterController = GetComponent<CharacterController>();
           _playerAnim = GetComponent<Animator>();
+          starttingPose = transform.position;
     }
 
     // Update is called once per frame
