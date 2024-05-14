@@ -4,15 +4,26 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        Cursor.lockState = CursorLockMode.Locked;
-    }
+    public static GameManager Instance { get; private set;}
 
-    // Update is called once per frame
-    void Update()
+    [SerializeField] private int currentLevelNumber = 1;
+
+    void Awake()
     {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
         
+    }
+    
+    public int GetCurrentLevelNumber()
+    {
+        return currentLevelNumber;
     }
 }
