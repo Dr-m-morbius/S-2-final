@@ -1,4 +1,4 @@
-using System.Collections;
+ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,9 +6,11 @@ using UnityEngine.SceneManagement;
 
 
 public class levelselect : MonoBehaviour
-{    
+{     
     public Button[] levelButtons;
     private int _currentLevel = 1;
+
+  
 
     void Awake()
     {
@@ -31,6 +33,7 @@ public class levelselect : MonoBehaviour
 
     void Start()
     {
+        Cursor.lockState = CursorLockMode.None;
         //Turn button active based on current available level
         for(int i = 0; i < _currentLevel; i++)
         {
