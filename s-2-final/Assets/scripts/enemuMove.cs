@@ -54,4 +54,11 @@ public class enemuMove : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
         _isAttacking = false;
     }
+    void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.CompareTag("bullet"))
+        {
+            Destroy(this.gameObject);
+        }
+    }
 }
