@@ -8,11 +8,12 @@ public class spawnmanager : MonoBehaviour
 
          public int CoinAmount = 10;
            public float Area = 20f;
+            public GameObject Enemy;
 
     // Start is called before the first frame update
     void Start()
     {
-  
+  StartCoroutine(SpawnRandomNumber());
             SpawnCoin();
     }
 
@@ -27,6 +28,11 @@ public class spawnmanager : MonoBehaviour
         for(int i = 0; i < CoinAmount; i++)
         Instantiate(Coin, CreateSpawnLocation(), Coin.transform.rotation);
     }
+    void SpawnRandomEnemy()
+    {
+        Instantiate(Enemy, (CreateSpawnLocation()), Enemy.transform.rotation);
+    }
+
 
     Vector3 CreateSpawnLocation()
     {
@@ -36,6 +42,23 @@ public class spawnmanager : MonoBehaviour
 
         return randomPosition;
 
+    }
+
+    IEnumerator SpawnRandomNumber()
+    {
+        while (true)
+        {
+        int randomSeconds = Random.Range(1, 8);
+        yield return new WaitForSeconds(randomSeconds);
+
+        int NumberofEnemy = Random.Range(1, 3);
+        for (int i = 0; i < NumberofEnemy; i++) 
+        {
+                SpawnRandomEnemy();
+
+            }
+        }
+       
     }
 
 }

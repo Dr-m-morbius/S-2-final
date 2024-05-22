@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class enemuMove : MonoBehaviour
 {
     public float speed = 1f;
     public float rangeValue = 5f;
+    public int GameOver;
     private Vector3 _startingPosition;
     [SerializeField] private bool _isAttacking;
     [SerializeField] private Transform _player;
@@ -59,6 +61,11 @@ public class enemuMove : MonoBehaviour
         if (other.gameObject.CompareTag("bullet"))
         {
             Destroy(this.gameObject);
+        }
+
+        if (other.gameObject.CompareTag("player"))
+        {
+             SceneManager.LoadScene(GameOver);
         }
     }
 }

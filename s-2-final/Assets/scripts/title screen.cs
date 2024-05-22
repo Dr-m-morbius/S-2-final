@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System;
 
 public class titlescreen : MonoBehaviour
 {
@@ -16,6 +17,10 @@ public class titlescreen : MonoBehaviour
     public void OnQuitButtonPressed()
     {
         Application.Quit();
+    }
+    void Update()
+    {
+        Cursor.lockState = CursorLockMode.None;
     }
 
 }
