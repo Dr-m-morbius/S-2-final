@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class spawnmanager : MonoBehaviour
 {
-      public GameObject Coin;
+    public GameObject Coin;
+    public float Area = 20f;
+    public int CoinAmount = 10;
 
-         public int CoinAmount = 10;
-           public float Area = 20f;
-            public GameObject Enemy;
-
+    public GameObject Enemy;
     // Start is called before the first frame update
     void Start()
     {
-  StartCoroutine(SpawnRandomNumber());
-            SpawnCoin();
+        //SpawnRandomEnemy();
+        StartCoroutine(SpawnRandomNumber());
+        SpawnCoin();
     }
 
     // Update is called once per frame
@@ -23,16 +23,15 @@ public class spawnmanager : MonoBehaviour
         
     }
 
-    void SpawnCoin()
-    {
-        for(int i = 0; i < CoinAmount; i++)
-        Instantiate(Coin, CreateSpawnLocation(), Coin.transform.rotation);
-    }
     void SpawnRandomEnemy()
     {
         Instantiate(Enemy, (CreateSpawnLocation()), Enemy.transform.rotation);
     }
 
+    void SpawnCoin()
+    {
+        Instantiate(Coin, CreateSpawnLocation(), Coin.transform.rotation);
+    }
 
     Vector3 CreateSpawnLocation()
     {
@@ -55,10 +54,10 @@ public class spawnmanager : MonoBehaviour
         for (int i = 0; i < NumberofEnemy; i++) 
         {
                 SpawnRandomEnemy();
+                SpawnCoin();
 
             }
         }
        
     }
-
 }

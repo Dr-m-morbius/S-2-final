@@ -52,6 +52,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: box_small_decorated
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e630bba3ecfcd49d4b5b97d2fa1982cd, type: 3}
+      propertyPath: m_TagString
+      value: coll
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -131,5 +135,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f66377c921f14f52a937dca18b54d97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  value: 1
-  scoreText: {fileID: 0}
+  score: 0

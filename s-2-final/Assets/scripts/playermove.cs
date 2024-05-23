@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using TMPro;
 
 public class playermove : MonoBehaviour
 {
      public float moveSpeed = 1f;
       public GameObject bullet;
+      public int _Score;
+      public TextMeshProUGUI scoreText;
       
       public GameObject fireball;
     public Transform firePoint;
@@ -115,5 +119,15 @@ public class playermove : MonoBehaviour
             }
               Instantiate(fireball, fireballpoint.position, fireballpoint.rotation);
          }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("coll"))
+        {
+            Destroy(other.gameObject);
+            _Score++;
+    scoreText.text = "score; " + _Score.ToString();
+        }
     }
 }
