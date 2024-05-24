@@ -32,5 +32,8 @@ public class fireball : MonoBehaviour
     {
          Instantiate(explo, expopoint.position, expopoint.rotation);
           Destroy(this.gameObject);
+
+
+        
     }
 }

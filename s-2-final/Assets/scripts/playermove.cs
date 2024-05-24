@@ -15,6 +15,8 @@ public class playermove : MonoBehaviour
     public Transform firePoint;
     public Transform fireballpoint;
     public float jumpForce = 10f;
+    private ammo _ammo;
+    private FireAmmo fireAmmo;
       public Transform theCamera;
     public float gravityModifier = 1f;
         public Transform groundCheckpoint;
@@ -33,6 +35,8 @@ public class playermove : MonoBehaviour
           _characterController = GetComponent<CharacterController>();
           _playerAnim = GetComponent<Animator>();
           starttingPose = transform.position;
+          _ammo = GetComponent<ammo>();
+          fireAmmo = GetComponent<FireAmmo>();
     }
 
     // Update is called once per frame
@@ -83,7 +87,7 @@ public class playermove : MonoBehaviour
         theCamera.rotation = Quaternion.Euler(theCamera.rotation.eulerAngles + new Vector3(-mouseInput.y, 0f, 0f));
 
         //primary shooting
-         if(Input.GetMouseButtonDown(0))
+         if(Input.GetMouseButtonDown(1) && _ammo.GetAmmoAmount() > 0)
          {
             //Find the crosshair
             RaycastHit hit;
@@ -99,10 +103,11 @@ public class playermove : MonoBehaviour
                 firePoint.LookAt(theCamera.position + (theCamera.forward * 30f));
             }
               Instantiate(bullet, firePoint.position, firePoint.rotation);
+              _ammo.RemoveAmmo();
          }
 
          //secondary shooting 
-         if(Input.GetMouseButtonDown(1))
+         if(Input.GetMouseButtonDown(0) && fireAmmo.GetAmmoAmount() > 0)
          {
             //Find the crosshair
             RaycastHit hit;
@@ -110,14 +115,15 @@ public class playermove : MonoBehaviour
             {
                 if(Vector3.Distance(theCamera.position, hit.point) > 2f)
                 {
-                    fireballpoint.LookAt(hit.point);
+                    firePoint.LookAt(hit.point);
                 }
             }
             else
             {
-                fireballpoint.LookAt(theCamera.position + (theCamera.forward * 30f));
+                firePoint.LookAt(theCamera.position + (theCamera.forward * 30f));
             }
               Instantiate(fireball, fireballpoint.position, fireballpoint.rotation);
+              fireAmmo.RemoveAmmo();
          }
     }
 

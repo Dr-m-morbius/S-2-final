@@ -7,6 +7,8 @@ TagManager:
   - player
   - bullet
   - coll
+  - opp
+  - fire
   layers:
   - Default
   - TransparentFX

@@ -67,5 +67,18 @@ public class enemuMove : MonoBehaviour
         {
              SceneManager.LoadScene(GameOver);
         }
+        if (other.gameObject.CompareTag("fire")) 
+        {
+            Destroy(this.gameObject);
+        }
+        if (other.gameObject.CompareTag("fire")) 
+        {
+            Destroy(this.gameObject);
+        }
     }
+    void OnTriggerEnter(Collider other)
+    {
+        
+    }
+
 }
